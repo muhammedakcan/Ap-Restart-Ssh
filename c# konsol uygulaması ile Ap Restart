@@ -1,0 +1,27 @@
+using Renci.SshNet;
+//Burada ise c# ile yazdığımız için  faydalı bir ssh kütüphane olduğu için renci kütüphanesini kullanıyoruz,
+//konsol uygulaması açtıktan sonra proje dosyasına sağ tık-kütüphane ekle'den kütüphaneninizi indirebilirsiniz.
+class Program
+{
+    static void Main(string[] args)
+    {
+        var host = "accesspoint_ip_adresi";
+        var username = "kullanici_adi";
+        var password = "sifre";
+
+        using (var client = new SshClient(host, username, password))
+        {
+            client.Connect();
+
+            if (client.IsConnected)
+            {
+                var command = client.CreateCommand("reboot");
+                var result = command.Execute();
+
+                Console.WriteLine(result);
+            }
+
+            client.Disconnect();
+        }
+    }
+}
