@@ -1,0 +1,17 @@
+import paramiko
+#paramiko kütüphanesini indirin pip ile indirebilirsiniz. 
+#ardından import paramiko ifadesinde uyarı ile karşılaşmamanız gerek.
+
+def reboot_ap(hostname, username, password):
+    ssh = paramiko.SSHClient()
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    ssh.connect(hostname, username=username, password=password)
+    ssh_stdin, ssh_stdout, ssh_stderr = ssh.exec_command("reboot")
+    output = ssh_stdout.read().decode("utf-8")
+    ssh.close()
+    return output
+#alttaki bilgileri tırnak içinde "1.1.1.1" şeklinde yazın.
+hostname = "cihazip"
+username = "admin"
+password = "password"
+print(reboot_ap(hostname, username, password))
