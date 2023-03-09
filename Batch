@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Access Point cihazının IP adresi, kullanıcı adı ve parolası
+HOST="Ap'nin ip'si"
+USER="kullanıcı_adı"
+PASSWORD="şifre"
+
+# SSH ile cihaza bağlanma ve "reboot" komutunu gönderme
+sshpass -p "$PASSWORD" ssh "$USER@$HOST" 'reboot'
+
+# SSH oturumunu sonlandırma
+ssh "$USER@$HOST" 'exit'
